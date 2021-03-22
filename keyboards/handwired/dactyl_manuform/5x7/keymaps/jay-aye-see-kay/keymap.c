@@ -34,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                          OSL(_MIRROR), KC_H,  KC_J,  KC_K,     KC_L,      KC_SCLN,  KC_QUOT,
                                        KC_N,  KC_M,  KC_COMM,  KC_DOT,    KC_SLSH,  KC_RSFT,
                                                      MO(_CODE),MO(_MOVE), XXXXXXX,  XXXXXXX,
-                  MO(_CODE),  KC_RGUI,
+                  KC_RCTL,  KC_RGUI,
                   KC_ENTER, KC_RALT,
                   XXXXXXX,  XXXXXXX
 ),

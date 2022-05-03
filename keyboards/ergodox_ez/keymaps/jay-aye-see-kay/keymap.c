@@ -3,8 +3,7 @@
 
 enum layers {
     BASE, // default layer
-    CODE, // symbol keys
-    MOVE,  // movement keys
+    SYMB, // symbol keys
 };
 
 enum custom_keycodes {
@@ -20,34 +19,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |   1  |   2  |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9  |   0  |        |
+ * | =      |   1  |   2  |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9  |   0  |   -    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |Tab/MOVE|   Q  |   W  |   E  |   R  |   T  |      |           |      |   Y  |   U  |   I  |   O  |   P  |   \    |
+ * | Tab    |   Q  |   W  |   E  |   R  |   T  |      |           |      |   Y  |   U  |   I  |   O  |   P  |   \    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | Esc    |   A  |   S  |   D  |   F  |   G  |------|           |------|   H  |   J  |   K  |   L  |   ;  |   '    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | LShift |   Z  |   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |  Alt | Win  | Ctl  |                                       | CODE | MOVE |      |      |      |
+ *   |      |   `  |      | left |right |                                       | down |  up  |   [  |   ]  |      |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |      |      |       |      |      |
+ *                                        | ctrl | alt  |       | alt  | ctrl |
  *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      | Home |       | PgUp |      |      |
- *                                 | Space|Backsp|------|       |------| Tab  |Enter |
- *                                 |      |ace   | End  |       | PgDn |      |      |
+ *                                 |      |      | win  |       | win  |      |      |
+ *                                 | Space|Backsp|------|       |------|Enter |Enter |
+ *                                 |      |ace   |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
 [BASE] = LAYOUT_ergodox_pretty(
   // left hand
-  XXXXXXX,          KC_1,    KC_2,    KC_3,    KC_4,    KC_5, XXXXXXX,              XXXXXXX, KC_6,     KC_7,     KC_8,    KC_9,     KC_0,    XXXXXXX,
-  LT(MOVE, KC_TAB), KC_Q,    KC_W,    KC_E,    KC_R,    KC_T, XXXXXXX,              XXXXXXX, KC_Y,     KC_U,     KC_I,    KC_O,     KC_P,    KC_BSLASH,
+  KC_EQL,           KC_1,    KC_2,    KC_3,    KC_4,    KC_5, XXXXXXX,              XXXXXXX, KC_6,     KC_7,     KC_8,    KC_9,     KC_0,    KC_MINS,
+  KC_TAB,           KC_Q,    KC_W,    KC_E,    KC_R,    KC_T, XXXXXXX,              XXXXXXX, KC_Y,     KC_U,     KC_I,    KC_O,     KC_P,    KC_BSLASH,
   KC_ESC,           KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                                KC_H,     KC_J,     KC_K,    KC_L,     KC_SCLN, KC_QUOT,
   KC_LSFT,          KC_Z,    KC_X,    KC_C,    KC_V,    KC_B, XXXXXXX,              XXXXXXX, KC_N,     KC_M,     KC_COMM, KC_DOT,   KC_SLSH, KC_RSFT,
-  XXXXXXX,          XXXXXXX, KC_LALT, KC_LGUI, KC_LCTL,                                      MO(CODE), MO(MOVE), XXXXXXX, XXXXXXX,  XXXXXXX,
-                                                         XXXXXXX, XXXXXXX,       XXXXXXX, XXXXXXX,
-                                                                  KC_HOME,       KC_PGUP,
-                                                 KC_SPC, KC_BSPC,  KC_END,       KC_PGDN, KC_TAB, KC_ENT
+  MO(SYMB),         KC_GRV,  XXXXXXX, KC_LEFT, KC_RGHT,                                                KC_DOWN,  KC_UP,   KC_LBRC,  KC_RBRC, MO(SYMB),
+                                                         KC_LCTL, KC_LALT,       KC_RALT, KC_RCTL,
+                                                                  KC_LGUI,       KC_RGUI,
+                                                 KC_SPC, KC_BSPC, XXXXXXX,       XXXXXXX, KC_ENT, KC_ENT
 ),
 
 /* Keymap 1: Symbol Layer
@@ -71,47 +70,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-[CODE] = LAYOUT_ergodox_pretty(
+[SYMB] = LAYOUT_ergodox_pretty(
   // left hand
   _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______,     _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
   _______, KC_TILD, KC_GRV,  KC_LCBR, KC_RCBR, XXXXXXX, _______,     _______, XXXXXXX, KC_7,    KC_8,    KC_9,    XXXXXXX, KC_F12,
   _______, KC_UNDS, KC_MINS, KC_LPRN, KC_RPRN, XXXXXXX,                       KC_0,    KC_4,    KC_5,    KC_6,    XXXXXXX, _______,
   _______, KC_PLUS, KC_EQL,  KC_LBRC, KC_RBRC, XXXXXXX, _______,     _______, XXXXXXX, KC_1,    KC_2,    KC_3,    XXXXXXX, _______,
   _______, _______, _______, _______, _______,                                         _______, _______, _______, _______, _______,
-                                               _______, _______,     _______, _______,
-                                                        _______,     _______,
-                                      _______, _______, _______,     _______, _______, _______
-),
-
-/* Keymap 2: Media and mouse keys
- *
- * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
- * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      | Lclk | MsUp | Rclk |      |      |           |      |      |      |      |      |      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |ScrlUp|MsLeft|MsDown|MsRght|      |------|           |------| Left | Down |  Up  | Right|      |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |ScrlDn|      |      |      |      |      |           |      |      |VolDn |VolUp | Mute | Play |  Next  |
- * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      |      |      |                                       |      |      |      |      |      |
- *   `----------------------------------'                                       `----------------------------------'
- *                                        ,-------------.       ,-------------.
- *                                        |      |      |       |      |      |
- *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      |      |       |      |      |      |
- *                                 |      |      |------|       |------|      |      |
- *                                 |      |      |      |       |      |      |      |
- *                                 `--------------------'       `--------------------'
- */
-[MOVE] = LAYOUT_ergodox_pretty(
-  // left hand
-  _______, _______, _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______, _______, _______,
-  _______, XXXXXXX, KC_BTN2, KC_MS_U, KC_BTN1, XXXXXXX, _______,     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
-  _______, KC_WH_U, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX,                       KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, _______,
-  _______, KC_WH_D, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,     _______, XXXXXXX, KC_VOLD, KC_VOLU, KC_MUTE, KC_MPLY, KC_MNXT,
-  _______, _______, _______, _______, _______,                                         _______, _______, _______, _______, _______,
-
                                                _______, _______,     _______, _______,
                                                         _______,     _______,
                                       _______, _______, _______,     _______, _______, _______
